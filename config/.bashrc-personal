@@ -45,7 +45,7 @@ alias l.='eza -ald --color=always --group-directories-first --icons .*'         
 alias d='eza -a --grid --header --color=always --group-directories-first --icons'   # long format
 alias dir='eza -a --grid --header --color=always --group-directories-first --icons' # long format
 
-ncg='nix-collect-garbage --delete-old && sudo nix-collect-garbage -d && sudo /run/current-system/bin/switch-to-configuration boot'
+alias ncg='nix-collect-garbage --delete-old && sudo nix-collect-garbage -d && sudo /run/current-system/bin/switch-to-configuration boot'
 
 # My personal ones
 #
