@@ -396,6 +396,48 @@ Default keybinds from <code>config/hypr/hyprland.conf</code> (with <code>$mainMo
 | SUPER + 1–0                    | workspace 1–10                             | Switch to workspace 1–10                                 |
 | SUPER + SHIFT + 1–0            | movetoworkspace 1–10                       | Move focused window to workspace 1–10                    |
 | SUPER + mouse scroll down      | workspace e+1                              | Go to next workspace                                     |
-| SUPER + mouse scroll up        | workspace e-1                              | Go to previous workspace                                 |
+| SUPER + mouse scroll up        | workspace e-1                              | Go to previous workspace                                     |
 | SUPER + mouse:272 (drag left)  | movewindow                                 | Drag to move window                                      |
 | SUPER + mouse:273 (drag right) | resizewindow                               | Drag to resize window                                    |
+
+## Repository layout
+
+Annotated overview of the main files and directories in this flake:
+
+```text path=null start=null
+tony-nixos/
+├── flake.nix                     # Flake entrypoint; defines inputs and hyprland-btw system
+├── configuration.nix             # Top-level NixOS system configuration
+├── hardware-configuration.nix    # Hardware/disk layout for this machine (auto-generated)
+├── home.nix                      # Home Manager configuration for user dwilliams
+├── LICENSE                       # Project license
+├── README.md                     # Project overview and documentation
+└── config/                       # User-level and modular configuration
+    ├── packages.nix              # System packages module (environment.systemPackages)
+    ├── fonts.nix                 # Fonts and Nerd Fonts configuration
+    ├── nixvim.nix                # Nixvim module (Neovim configuration via Nix)
+    ├── noctalia.nix              # Noctalia shell / QuickShell integration
+    ├── zsh.nix                   # Zsh-related Home Manager configuration
+    ├── vscode.nix                # VS Code / editor-related configuration
+    ├── .bashrc-personal          # Extra interactive shell configuration (copied to $HOME)
+    ├── tmux.conf                 # Tmux configuration (copied to ~/.config/tmux/tmux.conf)
+    ├── starship.toml             # Starship prompt configuration
+    ├── fastfetch/                # Fastfetch configuration and logo
+    │   ├── config.jsonc          # Fastfetch output configuration
+    │   └── nixos.png             # Logo used by fastfetch
+    ├── foot/                     # Foot terminal configuration
+    │   └── foot.ini              # Foot terminal settings
+    ├── hypr/                     # Hyprland and Hyprpaper configuration
+    │   ├── hyprland.conf         # Hyprland compositor config and keybinds
+    │   └── hyprpaper.conf        # Wallpaper configuration
+    ├── waybar/                   # Waybar status bar configuration
+    │   ├── config.jsonc          # Waybar modules and layout
+    │   └── style.css             # Waybar styling
+    ├── kitty/                    # Kitty terminal configuration
+    │   └── kitty.conf            # Kitty settings, fonts, and keybinds
+    └── images/                   # Screenshots used in the README
+        ├── ScreenShot-Noctalia.png
+        ├── ScreenShot-htop-noctalia.png
+        ├── ScreenShot-htop-waybar.png
+        └── ScreenShot-waybar.png
+```
