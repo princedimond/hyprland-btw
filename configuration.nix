@@ -22,7 +22,7 @@
   services = {
     getty.autologinUser = "dwilliams";
     openssh.enable = true;
-    tumbler.enable = true; 
+    tumbler.enable = true;
     envfs.enable = true;
     libinput.enable = true;
     pipewire = {
@@ -72,6 +72,7 @@
 
 
     # Hyprland Related 
+    quickshell
     clipman
     grim
     slurp
