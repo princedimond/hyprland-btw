@@ -255,8 +255,6 @@ Below you can expand each Nix file to view its full contents.
 
 {
 
-### Add packages below.
-
 environment.systemPackages = with pkgs; [
 
     ## Hyprland specific
