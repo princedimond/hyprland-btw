@@ -52,8 +52,8 @@ nix-shell -p git
 cd ~
 git clone https://gitlab.com/your-remote/tony-nixos.git
 cd tony-nixos
-chmod +x ./install-tony-nixos.sh
-./install-tony-nixos.sh
+chmod +x ./install.sh
+./install.sh
 ```
 
 - The script:
@@ -65,7 +65,7 @@ chmod +x ./install-tony-nixos.sh
 Non-interactive usage:
 
 ```bash
-./install-tony-nixos.sh --non-interactive
+./install.sh --non-interactive
 ```
 
 ### Manual install
