@@ -42,7 +42,7 @@
 Below you can expand each Nix file to view its full contents.
 
 <details>
-<summary><code>flake.nix</code> – Flake entrypoint</summary>
+<summary><span style="font-size:1.1em"><code>flake.nix</code> – Flake entrypoint</span></summary>
 
 ```nix
 {
@@ -85,7 +85,7 @@ Below you can expand each Nix file to view its full contents.
 </details>
 
 <details>
-<summary><code>configuration.nix</code> – System configuration</summary>
+<summary><span style="font-size:1.1em"><code>configuration.nix</code> – System configuration</span></summary>
 
 ```nix
 { config, lib, pkgs, ... }:
@@ -263,7 +263,7 @@ Below you can expand each Nix file to view its full contents.
 </details>
 
 <details>
-<summary><code>home.nix</code> – Home Manager configuration</summary>
+<summary><span style="font-size:1.1em"><code>home.nix</code> – Home Manager configuration</span></summary>
 
 ```nix
 { config, pkgs, inputs, ... }:
