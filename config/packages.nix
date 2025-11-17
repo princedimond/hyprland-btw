@@ -46,6 +46,7 @@
     htop
     hyfetch
     kitty
+    bibata-cursors
     lunarvim # Alternate neovim (lvim)
     luarocks # LUA for nevoim
     ncdu
