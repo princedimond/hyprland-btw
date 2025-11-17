@@ -14,7 +14,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, nixvim, noctalia, ... }: {
+  outputs = inputs@{ self, nixpkgs, home-manager, nixvim, noctalia, ... }: {
     nixosConfigurations.hyprland-btw = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
