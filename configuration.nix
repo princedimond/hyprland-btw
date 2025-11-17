@@ -26,8 +26,12 @@
 
   # Add services 
   services = {
-    # Disable TTY autologin; use a display manager (ly) instead.
-    getty.autologinUser = null;
+    # Enabled VM guest services
+    qemuGuest.enable = true;
+    spice-vdagentd.enable = true;
+    spice-webdavd.enable = true;
+    spice-autorandr.enable = true
+      getty.autologinUser = null; # disable auto-login
     openssh.enable = true;
     tumbler.enable = true;
     envfs.enable = true;
