@@ -32,6 +32,7 @@
       profileExtra = ''
         if [ -z "$WAYLAND_DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
           #exec uwsm start -S hyprland-uwsm.desktop
+          export GTK_THEME=adw-gtk3-dark
           exec Hyprland
         fi
       '';
