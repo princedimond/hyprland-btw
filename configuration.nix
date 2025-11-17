@@ -22,6 +22,8 @@
   services = {
     getty.autologinUser = "dwilliams";
     openssh.enable = true;
+    tumbler.enable = true; 
+    envfs.enable = true;
     libinput.enable = true;
     pipewire = {
       enable = true;
