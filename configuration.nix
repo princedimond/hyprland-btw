@@ -92,6 +92,7 @@
     atop
     bat
     btop
+    bottom
     clang
     curl
     eza
@@ -102,6 +103,7 @@
     git
     gping
     google-chrome
+    htop
     hyfetch
     kitty
     lunarvim
