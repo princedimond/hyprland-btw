@@ -9,8 +9,8 @@
     ./config/yazi/default.nix
   ];
   home = {
-    username = lib.mkDefault "your-username";
-    homeDirectory = lib.mkDefault "/home/your-username";
+    username = lib.mkDefault "dwilliams";
+    homeDirectory = lib.mkDefault "/home/dwilliams";
     stateVersion = "25.11";
     sessionVariables = {
       GTK_THEME = "Adwaita:dark";
