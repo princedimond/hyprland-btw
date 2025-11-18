@@ -23,7 +23,7 @@ in {
 
       # Try to enable dock exclusive zone and theme-by-wallpaper in common formats
       # 1) JSON: set any "exclusive": false to true
-      find "$DEST" -type f -name '*.json' -print0 | while IFS= read -r -d '' f; do
+      find "$DEST" -type f -name '*.json' -print0 | while IFS= read -r -d $'\0' f; do
         sed -i 's/\("exclusive"[[:space:]]*:[[:space:]]*\)false/\1true/g' "$f" || true
         sed -i 's/\("themeByWallpaper"[[:space:]]*:[[:space:]]*\)false/\1true/g' "$f" || true
         # Set wallpaperDir if present
@@ -31,7 +31,7 @@ in {
       done
 
       # 2) YAML/YML: set any exclusive: false to true, themeByWallpaper: false to true
-      find "$DEST" -type f \( -name '*.yaml' -o -name '*.yml' \) -print0 | while IFS= read -r -d '' f; do
+      find "$DEST" -type f \( -name '*.yaml' -o -name '*.yml' \) -print0 | while IFS= read -r -d $'\0' f; do
         sed -i 's/\(exclusive[[:space:]]*:[[:space:]]*\)false/\1true/g' "$f" || true
         sed -i 's/\(themeByWallpaper[[:space:]]*:[[:space:]]*\)false/\1true/g' "$f" || true
         # naive wallpaperDir replacement if key exists

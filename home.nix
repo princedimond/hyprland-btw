@@ -94,7 +94,7 @@
     DEST="$HOME/Pictures/Wallpapers"
     mkdir -p "$DEST"
     # Copy each file only if it doesn't already exist
-    find "$SRC" -maxdepth 1 -type f -print0 | while IFS= read -r -d '' f; do
+    find "$SRC" -maxdepth 1 -type f -print0 | while IFS= read -r -d $'\0' f; do
       bn="$(basename "$f")"
       if [ ! -e "$DEST/$bn" ]; then
         cp "$f" "$DEST/$bn"
