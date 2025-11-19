@@ -346,12 +346,91 @@ echo -e "${GREEN}Selected keyboard layout: $keyboardLayout${NC}"
 echo -e "${GREEN}Selected console keymap: $consoleKeyMap${NC}"
 echo -e "${GREEN}Selected GPU profile: $GPU_PROFILE${NC}"
 
+# Detect existing human users (UID >= 1000) to preserve; exclude the chosen primary user.
+PRESERVE_USERS=()
+while IFS=: read -r _name _pw _uid _gid _gecos _home _shell; do
+  # skip non-numeric or malformed UID entries just in case
+  if [[ "${_uid}" =~ ^[0-9]+$ ]] && [ "${_uid}" -ge 1000 ]; then
+    # ignore disabled shells
+    if [[ "${_shell}" != */nologin && "${_shell}" != */false ]]; then
+      if [[ "${_name}" != "${userName}" ]]; then
+        PRESERVE_USERS+=("${_name}")
+      fi
+    fi
+  fi
+done < <(getent passwd || cat /etc/passwd)
+
+if [ ${#PRESERVE_USERS[@]} -gt 0 ]; then
+  echo -e "${YELLOW}Preserving existing users (will not be removed on switch): ${PRESERVE_USERS[*]}${NC}"
+  # Ensure we do not delete undeclared users: enable mutable users policy.
+  if grep -qE '\busers\.mutableUsers\b' ./configuration.nix; then
+    sed -i 's|users\.mutableUsers = .*;|users.mutableUsers = true;|' ./configuration.nix
+  else
+    # Insert after nix.settings.experimental-features for a stable anchor
+    sed -i '/nix\.settings\.experimental-features/a\  users.mutableUsers = true;' ./configuration.nix
+  fi
+else
+  echo -e "${GREEN}No additional existing human users detected to preserve.${NC}"
+fi
+
 # Patch configuration.nix with chosen timezone, hostname, username, layouts, and VM profile.
 sed -i -E 's|(^\s*time\.timeZone\s*=\s*\").*(\";)|\1'"$timeZone"'\2|' ./configuration.nix
 # configuration.nix defines hostName inside the networking attrset (not networking.hostName = ...)
 sed -i -E 's|(^\s*hostName\s*=\s*\").*(\";)|\1'"$hostName"'\2|' ./configuration.nix
-# Update the primary user attribute in configuration.nix to the chosen username (match any current value).
-sed -i -E 's|users\.users\."[^"]+"\s*=\s*\{|users.users."'"$userName"'" = {|' ./configuration.nix
+
+# Determine the currently-declared primary user in configuration.nix
+CURRENT_DECLARED_USER=$(sed -n -E 's/.*users\.users\."([^"]+)"\s*=\s*\{.*/\1/p' ./configuration.nix | head -n1 || true)
+if [ -z "$CURRENT_DECLARED_USER" ]; then
+  CURRENT_DECLARED_USER="dwilliams"
+fi
+
+# If the chosen username differs, do NOT rename the existing user entry.
+# Instead, add a new users.users block for the new primary user and force users.mutableUsers = true.
+if [ "$userName" != "$CURRENT_DECLARED_USER" ]; then
+  echo -e "${YELLOW}Primary user changed: ${CURRENT_DECLARED_USER} -> ${userName}. Adding new user entry and keeping existing users.${NC}"
+  # Ensure users.mutableUsers = true so undeclared users are not removed.
+  if grep -qE '\busers\.mutableUsers\b' ./configuration.nix; then
+    sed -i 's|users\.mutableUsers = .*;|users.mutableUsers = true;|' ./configuration.nix
+  else
+    sed -i '/nix\.settings\.experimental-features/a\  users.mutableUsers = true;' ./configuration.nix
+  fi
+  # Only add a new entry if it doesn't already exist
+  if ! grep -qE "users\.users\\.\"${userName}\"\s*=\s*\{" ./configuration.nix; then
+    # Insert a minimal user definition after the existing primary user block
+    awk -v newuser="$userName" '
+      BEGIN{added=0}
+      {
+        print $0
+        if(!added && $0 ~ /users\.users\."([^"]+)"\s*=\s*\{/){
+          # Wait until we hit the closing brace of that block
+          inblk=1
+        }
+        if(inblk && $0 ~ /^\s*};\s*$/){
+          print "\n  users.users.\"" newuser "\" = {";
+          print "    isNormalUser = true;";
+          print "    extraGroups = [ \"wheel\" \"input\" ];";
+          print "    home = \"/home/" newuser "\";";
+          print "    createHome = true;";
+          print "    shell = pkgs.zsh;";
+          print "  };\n";
+          added=1; inblk=0
+        }
+      }
+      END{ if(!added){
+        print "\n  users.users.\"" newuser "\" = {";
+        print "    isNormalUser = true;";
+        print "    extraGroups = [ \"wheel\" \"input\" ];";
+        print "    home = \"/home/" newuser "\";";
+        print "    createHome = true;";
+        print "    shell = pkgs.zsh;";
+        print "  };";
+      }}
+    ' ./configuration.nix > ./configuration.nix.tmp && mv ./configuration.nix.tmp ./configuration.nix
+  fi
+else
+  echo -e "${GREEN}Primary username unchanged (${userName}); leaving users.users entries as-is.${NC}"
+fi
+
 # Update console keymap and XKB layout.
 sed -i "s|console.keyMap = \".*\";|console.keyMap = \"$consoleKeyMap\";|" ./configuration.nix
 sed -i "s|xserver.xkb.layout = \".*\";|xserver.xkb.layout = \"$keyboardLayout\";|" ./configuration.nix
