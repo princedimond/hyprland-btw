@@ -41,24 +41,27 @@ prompt_yes_no() {
   # default: Y or N (case-insensitive). If omitted, default is Y.
   local question="$1"
   local def="${2:-Y}"
-  local ans ch=""
+  local ans=""
   local suffix="[Y/n]"
   if [[ "$def" =~ ^[Nn]$ ]]; then suffix="[y/N]"; fi
   while true; do
-    if [ -w /dev/tty ]; then
+    if [ -r /dev/tty ] && [ -w /dev/tty ]; then
       printf "%s %s " "$question" "$suffix" > /dev/tty
-      IFS= read -r -n 1 ch < /dev/tty || true
-      echo > /dev/tty
+      IFS= read -r ans < /dev/tty || ans=""
     else
       printf "%s %s " "$question" "$suffix"
-      IFS= read -r -n 1 ch || true
-      echo
+      IFS= read -r ans || ans=""
     fi
-    case "$ch" in
-      [Yy]) return 0 ;;
-      [Nn]) return 1 ;;
-      "") if [[ "$def" =~ ^[Yy]$ ]]; then return 0; else return 1; fi ;;
-      *) ;; # reprompt
+    # Trim whitespace
+    ans="${ans//[$'\t\r\n ']}"
+    if [[ -z "$ans" ]]; then
+      if [[ "$def" =~ ^[Yy]$ ]]; then return 0; else return 1; fi
+    fi
+    # Lowercase comparison (bash >= 4)
+    case "${ans,,}" in
+      y|yes) return 0 ;;
+      n|no)  return 1 ;;
+      *) echo "Please answer y or n." ;;
     esac
   done
 }
