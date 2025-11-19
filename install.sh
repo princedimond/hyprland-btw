@@ -387,6 +387,8 @@ case "$GPU_PROFILE" in
     ;;
 esac
 
+# Update flake.nix: rename the nixosConfigurations.<name> attribute to the chosen hostname
+sed -i -E 's|(nixosConfigurations\.)[A-Za-z0-9._-]+(\s*=)|\1'"$hostName"'\2|' ./flake.nix
 # Update flake.nix and home.nix to avoid hardcoded username.
 sed -i -E 's|users\."[^"]+"\s*=\s*import \./home\.nix;|users."'"$userName"'" = import ./home.nix;|' ./flake.nix
 sed -i -E 's|home\.username = lib\.mkDefault ".*";|home.username = lib.mkDefault '"\"$userName\""';|' ./home.nix
@@ -500,13 +502,14 @@ fi
 
 print_header "Running nixos-rebuild (boot)"
 
-if sudo nixos-rebuild boot --flake .#hyprland-btw --option accept-flake-config true --refresh; then
+FLAKE_TARGET="#${hostName}"
+if sudo nixos-rebuild boot --flake .${FLAKE_TARGET} --option accept-flake-config true --refresh; then
   print_success_banner
   echo ""
   if [ $NONINTERACTIVE -eq 1 ]; then
-    echo "Non-interactive: please reboot your system to start using hyprland-btw."
+    echo "Non-interactive: please reboot your system to start using ${hostName}."
   else
-    read -p "Reboot now to start using hyprland-btw? (Y/N): " -n 1 -r
+    read -p "Reboot now to start using ${hostName}? (Y/N): " -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
       echo "Rebooting..."
