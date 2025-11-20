@@ -1,7 +1,9 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, lib, ... }:
 let
   home = config.home.homeDirectory;
   system = pkgs.stdenv.hostPlatform.system;
+  noctaliaPath = inputs.noctalia.packages.${system}.default;
+  configDir = "${noctaliaPath}/share/noctalia-shell";
 in {
   # Import the official Noctalia Home Manager module.
   # This provides `programs.noctalia-shell` and the user systemd service
@@ -10,8 +12,22 @@ in {
 
   # Make the Noctalia package available for this user (CLI, assets, etc.).
   home.packages = [
-    inputs.noctalia.packages.${system}.default
+    noctaliaPath
   ];
+
+  # Seed the Noctalia QuickShell shell code into ~/.config/quickshell/noctalia-shell
+  # once, then leave it writable for GUI-driven edits.
+  home.activation.seedNoctaliaShellCode = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    set -eu
+    DEST="$HOME/.config/quickshell/noctalia-shell"
+    SRC="${configDir}"
+
+    if [ ! -d "$DEST" ]; then
+      mkdir -p "$HOME/.config/quickshell"
+      cp -R "$SRC" "$DEST"
+      chmod -R u+rwX "$DEST"
+    fi
+  '';
 
   programs.noctalia-shell = {
     enable = true;
