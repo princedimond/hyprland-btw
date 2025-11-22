@@ -42,13 +42,13 @@ in {
     # of the config schema.
     settings = {
       # Use a generic terminal for app launcher (can be changed in GUI).
-      appLauncher.terminalCommand = "xterm -e";
+      appLauncher.terminalCommand = "kitty -e";
 
       # Dock behavior: enabled by default and overlapping windows instead of
       # reserving an exclusive zone.
       dock = {
         enabled = true;
-        displayMode = "overlap";
+        displayMode = "exclusive";
       };
 
       # Paths that previously hard-coded /home/dwilliams are now derived
