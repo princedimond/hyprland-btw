@@ -8,12 +8,12 @@ in
   imports = [
     ./config/nixvim.nix # Nixvim HM module
     ./config/noctalia.nix # Noctalia QuickShell wiring (fronm ddubsos)
-    ./config/vscode.nix
-    ./config/kitty.nix
+    ./config/vscode.nix # w/plugins and nero hyprland theme
+    ./config/kitty.nix #kitty term and kitty-bg (background in kitty)
     ./config/ghostty.nix
     ./config/wezterm.nix
     ./config/alacritty.nix
-    ./config/zsh.nix
+    ./config/zsh.nix # Cfg zsh from @justaguylinux
     ./config/yazi/default.nix
   ];
   home = {
