@@ -118,4 +118,5 @@
   home.file.".config/tmux/tmux.conf".source = ./config/tmux.conf;
   home.file.".config/starship.toml".source = ./config/starship.toml;
   home.file.".config/rofi/legacy.config.rasi".source = ./config/rofi/legacy.config.rasi;
+  home.file.".config/rofi/legacy-rofi.jpg".source = ./config/rofi/legacy-rofi.jpg;
 }
