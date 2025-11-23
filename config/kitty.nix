@@ -188,17 +188,7 @@
     '';
   };
 
-  # Dedicated kitty config that layers background image settings on top of the main config
-  # Keep standard kitty.conf as-is; kitty-bg.conf only adds/overrides background-related options.
-  home.file.".config/kitty/kitty-bg.conf".text = ''
-    include ./kitty.conf
-    # Background image managed by wrapper via symlink
-    background_image  ~/Pictures/current_image
-    background_image_layout scaled
-    background_tint 0.95
-    background_opacity 1.0
-    linux_display_server auto
-  '';
+  # Background image is applied at launch time by the kitty-bg wrapper via --override flags; no extra config file is written.
 
   # Wrapper to select a random wallpaper, update the symlink, and launch kitty with kitty-bg.conf
   home.packages = [
@@ -209,7 +199,6 @@
             # Defaults
             SOURCE_DIR="$HOME/Pictures/Wallpapers"
             LINK_PATH="$HOME/Pictures/current_image"
-            CONFIG_FILE="$HOME/.config/kitty/kitty-bg.conf"
             LAUNCH=1
             FOREGROUND=0
 
@@ -267,12 +256,20 @@
             mkdir -p "$(dirname "$LINK_PATH")"
             ln -sfn "$CHOSEN" "$LINK_PATH"
 
-            # Launch kitty using the dedicated config (background by default)
+            # Build overrides for background image settings
+            OVERRIDES=(
+              --override "background_image=$LINK_PATH"
+              --override "background_image_layout=scaled"
+              --override "background_tint=0.95"
+              --override "background_opacity=1.0"
+            )
+
+            # Launch kitty (background by default) with background image overrides
             if (( LAUNCH )); then
               if (( FOREGROUND )); then
-                exec kitty --config "$CONFIG_FILE" "$@"
+                exec kitty "${OVERRIDES[@]}" "$@"
               else
-                setsid -f kitty --config "$CONFIG_FILE" "$@" >/dev/null 2>&1 < /dev/null &
+                setsid -f kitty "${OVERRIDES[@]}" "$@" >/dev/null 2>&1 < /dev/null &
               fi
             fi
     '')
