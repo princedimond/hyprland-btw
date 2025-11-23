@@ -57,14 +57,19 @@
           ["config/kitty/kitty.conf"]="$repo/config/kitty/kitty.conf"
         )
 
-        choice="$(printf '%s\n' "''${!files[@]}" | sort | rofi -dmenu -i -config "$HOME/.config/rofi/config-menu.rasi" -p ' Edit Config')"
-        [ -z "''${choice}" ] && exit 0
-        target="''${files[$choice]}"
+        # Build menu list showing only existing files
+        menu_items=""
+        for display in "''${!files[@]}"; do
+          path="''${files[$display]}"
+          if [ -f "$path" ]; then
+            menu_items="$menu_items$display
+"
+          fi
+        done
 
-        mkdir -p "$(dirname "$target")"
-        if [ ! -e "$target" ]; then
-          : > "$target"
-        fi
+        choice="$(printf '%s' "$menu_items" | sort | rofi -dmenu -i -config "$HOME/.config/rofi/config-menu.rasi" -p ' Edit Config')"
+        [ -z "$choice" ] && exit 0
+        target="''${files[$choice]}"
 
         term="$(pick_term)"
         if [ -n "$term" ] && [[ "$EDITOR_BIN" =~ ^(nvim|vim|vi|nano|helix|hx)$ ]]; then
