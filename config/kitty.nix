@@ -268,16 +268,7 @@
             DESKTOP_DIR="$HOME/.local/share/applications"
             DESKTOP_FILE="$DESKTOP_DIR/kitty-bg.desktop"
             mkdir -p "$DESKTOP_DIR"
-            cat > "$DESKTOP_FILE" << 'DESKTOPEOF'
-[Desktop Entry]
-Type=Application
-Name=Kitty with Random Wallpaper
-Comment=Launch Kitty terminal with a random wallpaper
-Exec=kitty-bg
-Icon=utilities-terminal
-Terminal=false
-Categories=System;Utility;TerminalEmulator;
-DESKTOPEOF
+            printf '%s\n' '[Desktop Entry]' 'Type=Application' 'Name=Kitty with Random Wallpaper' 'Comment=Launch Kitty terminal with a random wallpaper' 'Exec=kitty-bg' 'Icon=utilities-terminal' 'Terminal=false' 'Categories=System;Utility;TerminalEmulator;' > "$DESKTOP_FILE"
 
             # Launch kitty (background by default) with background image overrides
             if (( LAUNCH )); then
