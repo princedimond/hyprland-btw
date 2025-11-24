@@ -3,6 +3,7 @@
 let
   rofiLegacyMenu = import ./config/scripts/rofi-legacy.menu.nix { inherit pkgs; };
   configMenu = import ./config/scripts/config-menu.nix { inherit pkgs; };
+  keybindsMenu = import ./config/scripts/keybinds.nix { inherit pkgs; };
 in
 {
   imports = [
@@ -27,6 +28,7 @@ in
     packages = [
       rofiLegacyMenu
       configMenu
+      keybindsMenu
       pkgs.dracula-theme
     ];
   };
