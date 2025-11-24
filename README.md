@@ -17,7 +17,7 @@ with a few additions:
 > Default target is **a single host**, often running in a VM.
 >
 > - QEMU/KVM with VirtIO and 3D acceleration enabled
-> - Can be installed from a live NixOS ISO (see Tony's video)
+> - Can be installed from a live NixOS ISO [See Tony's Vidoe: Stop Using MacOS](https://www.youtube.com/watch?v=7QLhCgDMqgw&t=140s)
 > - This repo now includes basic AMD/Intel/NVIDIA/Hybrid GPU + VM support out of the box.
 
 ### Important:
@@ -117,6 +117,7 @@ Below you can expand each Nix file to view its full contents.
 <summary><code>flake.nix</code> – Flake entrypoint</summary>
 
 ```nix
+
 {
   description = "Hyprland on Nixos";
 
@@ -138,12 +139,13 @@ Below you can expand each Nix file to view its full contents.
       system = "x86_64-linux";
       modules = [
         ./configuration.nix
+        ./modules/drivers/default.nix
         home-manager.nixosModules.home-manager
         {
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            users."your-username" = import ./home.nix;
+            users."dwilliams" = import ./home.nix;
             backupFileExtension = "backup";
             extraSpecialArgs = { inherit inputs; };
           };
@@ -152,6 +154,7 @@ Below you can expand each Nix file to view its full contents.
     };
   };
 }
+
 ```
 
 </details>
@@ -160,14 +163,15 @@ Below you can expand each Nix file to view its full contents.
 <summary><code>configuration.nix</code> – System configuration</summary>
 
 ```nix
-{ config, lib, pkgs, ... }:
+
+{ pkgs, ... }:
 
 {
   imports =
     [
       ./hardware-configuration.nix
-      ./config/packages.nix
       ./config/fonts.nix
+      ./config/packages.nix
     ];
 
   boot = {
@@ -188,14 +192,29 @@ Below you can expand each Nix file to view its full contents.
 
   time.timeZone = "America/New_York";
 
+  # GPU/VM profile for this single-host system
+  # Current host: VM with virtio GPU (no dedicated AMD/Intel/NVIDIA module enabled).
+  # The installer will set exactly ONE of these to true based on your GPU profile:
+  drivers.amdgpu.enable = false;  # AMD GPUs
+  drivers.intel.enable  = false;  # Intel iGPU
+  drivers.nvidia.enable = false;  # NVIDIA GPUs
+
+  # Enable VM guest services via the drivers module when running in a VM.
+  # Disable this if you are installing on bare metal without QEMU/Spice.
+  vm.guest-services.enable = true;
+
   # Add services
   services = {
-    # Disable TTY autologin; use a display manager (ly) instead.
-    getty.autologinUser = null;
+    getty.autologinUser = null; # disable auto-login
     openssh.enable = true;
     tumbler.enable = true;
     envfs.enable = true;
+    seatd.enable = true;
+    gnome.gnome-keyring.enable = true;
     libinput.enable = true;
+    # Default XKB layout for Hyprland/X11 (overridden by installer).
+    xserver.xkb.layout = "us";
+    flatpak.enable = true;
     pipewire = {
       enable = true;
       pulse.enable = true;
@@ -214,26 +233,56 @@ Below you can expand each Nix file to view its full contents.
       xwayland.enable = true;
       withUWSM = false;
     };
-    firefox.enable = true;
+    firefox.enable = false;
     thunar.enable = true;
     mtr.enable = true;
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
     };
+    zsh.enable = true; # ensure system zsh is configured for login shells
   };
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users."your-username" = {
+  # Default console keymap (overridden by installer).
+  console.keyMap = "us";
+
+  # Define the primary user account. Don't forget to set a password with ‘passwd’.
+  users.users."dwilliams" = {
     isNormalUser = true;
     extraGroups = [ "wheel" "input" ]; # Enable ‘sudo’ for the user.
+    shell = pkgs.zsh; # default login shell
     packages = with pkgs; [
       tree
     ];
   };
+
+  # Example: add additional users (uncomment and adjust as needed)
+  # users.users."seconduser" = {
+  #   isNormalUser = true;
+  #   extraGroups = [ "wheel" ];
+  #   shell = pkgs.zsh;
+  #   packages = with pkgs; [
+  #     git
+  #     htop
+  #   ];
+  # };
+
+  systemd.services.flatpak-add-flathub = {
+    description = "Add Flathub Flatpak remote";
+    wantedBy = [ "multi-user.target" ];
+    wants = [ "network-online.target" ];
+    after = [ "network-online.target" "flatpak-system-helper.service" ];
+    serviceConfig = {
+      Type = "oneshot";
+    };
+    script = ''
+      ${pkgs.flatpak}/bin/flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    '';
+  };
+
 
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -241,6 +290,7 @@ Below you can expand each Nix file to view its full contents.
   system.stateVersion = "25.11"; # Did you read the comment?
 
 }
+
 ```
 
 </details>
@@ -249,25 +299,45 @@ Below you can expand each Nix file to view its full contents.
 <summary><code>home.nix</code> – Home Manager configuration</summary>
 
 ```nix
-{ config, pkgs, inputs, ... }:
 
+{ config, pkgs, inputs, lib, ... }:
+
+let
+  rofiLegacyMenu = import ./config/scripts/rofi-legacy.menu.nix { inherit pkgs; };
+  configMenu = import ./config/scripts/config-menu.nix { inherit pkgs; };
+  keybindsMenu = import ./config/scripts/keybinds.nix { inherit pkgs; };
+in
 {
   imports = [
-    ./config/nixvim.nix # your Nixvim HM module
-    ./config/noctalia.nix # Noctalia QuickShell wiring (like ddubsos)
+    ./config/nixvim.nix # Nixvim HM module
+    ./config/noctalia.nix # Noctalia QuickShell wiring (fronm ddubsos)
+    ./config/vscode.nix # w/plugins and nero hyprland theme
+    ./config/kitty.nix #kitty term and kitty-bg (background in kitty)
+    ./config/ghostty.nix
+    ./config/wezterm.nix
+    ./config/alacritty.nix
+    ./config/zsh.nix # Cfg zsh from @justaguylinux
+    ./config/yazi/default.nix
   ];
   home = {
-    username = lib.mkDefault "your-username";
-    homeDirectory = lib.mkDefault "/home/your-username";
+    username = lib.mkDefault "dwilliams";
+    homeDirectory = lib.mkDefault "/home/dwilliams";
     stateVersion = "25.11";
     sessionVariables = {
-      GTK_THEME = "Adwaita:dark";
+      # GTK_THEME = "Adwaita:dark";
+      GTK_THEME = "Dracula";
     };
+    packages = [
+      rofiLegacyMenu
+      configMenu
+      keybindsMenu
+      pkgs.dracula-theme
+    ];
   };
 
   programs = {
     neovim = {
-      enable = false; # No managed by nixvim.nix
+      enable = false; # Now managed by nixvim.nix
       defaultEditor = true;
     };
     bash = {
@@ -288,15 +358,58 @@ Below you can expand each Nix file to view its full contents.
       profileExtra = ''
         if [ -z "$WAYLAND_DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
           #exec uwsm start -S hyprland-uwsm.desktop
-          export GTK_THEME=Adwaita:dark
+          # export GTK_THEME=Adwaita:dark
+          export GTK_THEME=Dracula
           exec Hyprland
         fi
       '';
     };
+
+    #  Enables seemless zoxide integration
+    zoxide = {
+      enable = true;
+      enableZshIntegration = true;
+      enableBashIntegration = true;
+      enableFishIntegration = true;
+      options = [
+        "--cmd cd"
+      ];
+    };
+
+    eza = {
+      enable = true;
+      icons = "auto";
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+      enableFishIntegration = true;
+      git = true;
+      extraOptions = [
+        "--group-directories-first"
+        "--no-quotes"
+        "--header" # Show header row
+        "--git-ignore"
+        "--classify" # append indicator (/, *, =, @, |)
+        "--hyperlink" # make paths clickable in some terminals
+      ];
+    };
   };
 
+  # Dracula theme configuration
   gtk = {
     enable = true;
+    theme = {
+      name = "Dracula";
+      package = pkgs.dracula-theme;
+      #package = pkgs.tokyonight-gtk-theme;
+      #Dark (Blue Accent): "Tokyonight-Dark-B"
+      #Dark (Moon Accent): "Tokyonight-Dark-Moon"
+      #Storm (Gray/Muted Accent): "Tokyonight-Storm-B"
+    };
+    # Optional: uncomment for Dracula icons
+    iconTheme = {
+      name = "candy-icons";
+      package = pkgs.candy-icons;
+    };
     gtk3.extraConfig = {
       "gtk-application-prefer-dark-theme" = 1;
     };
@@ -305,15 +418,33 @@ Below you can expand each Nix file to view its full contents.
     };
   };
 
+  # Seed wallpapers once into ~/Pictures/Wallpapers (Noctalia default), without overwriting user changes
+  home.activation.seedWallpapers = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    set -eu
+    SRC=${./config/wallpapers}
+    DEST="$HOME/Pictures/Wallpapers"
+    mkdir -p "$DEST"
+    # Copy each file only if it doesn't already exist
+    find "$SRC" -maxdepth 1 -type f -print0 | while IFS= read -r -d $'\0' f; do
+      bn="$(basename "$f")"
+      if [ ! -e "$DEST/$bn" ]; then
+        cp "$f" "$DEST/$bn"
+      fi
+    done
+  '';
+
   # Config apps
   home.file.".config/hypr".source = ./config/hypr;
   home.file.".config/waybar".source = ./config/waybar;
   home.file.".config/fastfetch".source = ./config/fastfetch;
-  home.file.".config/kitty".source = ./config/kitty;
   home.file.".config/foot".source = ./config/foot;
   home.file.".bashrc-personal".source = ./config/.bashrc-personal;
+  home.file.".zshrc-personal".source = ./config/.zshrc-personal;
   home.file.".config/tmux/tmux.conf".source = ./config/tmux.conf;
   home.file.".config/starship.toml".source = ./config/starship.toml;
+  home.file.".config/rofi/legacy.config.rasi".source = ./config/rofi/legacy.config.rasi;
+  home.file.".config/rofi/legacy-rofi.jpg".source = ./config/rofi/legacy-rofi.jpg;
+  home.file.".config/rofi/config-menu.rasi".source = ./config/rofi/config-menu.rasi;
 }
 ```
 
