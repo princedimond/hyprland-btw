@@ -36,9 +36,11 @@
     clang
     curl
     coreutils
+    dino # Jabber XMPP Client
     direnv # needed for zsh plugin and vscode
     fastfetch
     foot
+    gajim # Japper XMPP client 
     git
     gcc
     git
