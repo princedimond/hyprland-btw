@@ -6,6 +6,7 @@ let
   hyprlangVer = "0.0.3"; # fireblast.hyprlang-vscode
   hyprlsVer = "0.1.2"; # ewen-lbh.vscode-hyprls
   neroHyprlandVer = "0.0.2"; # amarcos1337.nero-hyprland
+  codeRunnerVer = "0.12.4"; # formulahendry.code-runner
 
   # Helper: prefer Open VSX (pkgs.vscode-extensions). If missing and a version is
   # provided, fetch from the VSCode Marketplace using extensionsFromVscodeMarketplace.
@@ -52,6 +53,12 @@ let
     version = neroHyprlandVer;
     sha256 = "sha256-3RiSYmJK/xODCvUi9c2xtvEIWSBABVHk6QYCAFoqsa8=";
   };
+  codeRunnerExts = extOrMarketplace {
+    publisher = "formulahendry";
+    name = "code-runner";
+    version = codeRunnerVer;
+    sha256 = pkgs.lib.fakeSha256;
+  };
 in
 {
   programs.vscode = {
@@ -73,7 +80,8 @@ in
           ])
           ++ hyprlangExts
           ++ hyprlsExts
-          ++ neroHyprlandExts;
+          ++ neroHyprlandExts
+          ++ codeRunnerExts;
         userSettings = {
           #"workbench.colorTheme" = "Catppuccin Mocha";
           #"workbench.iconTheme" = "catppuccin-mocha";
