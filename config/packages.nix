@@ -1,11 +1,8 @@
-{ pkgs, ... }:
-
-{
-  #  Add packages below. 
+{pkgs, ...}: {
+  #  Add packages below.
 
   environment.systemPackages = with pkgs; [
-
-    ## Hyprland specific 
+    ## Hyprland specific
     hyprpaper
     hyprshot
     hypridle
@@ -14,8 +11,8 @@
     libnotify # send alerts
     xdg-desktop-portal-hyprland
 
-    # Hyprland Related 
-    app2unit # launcher 
+    # Hyprland Related
+    app2unit # launcher
     clipman
     cliphist
     grim
@@ -27,7 +24,7 @@
     waybar
     matugen
     wl-clipboard
-
+    kdePackages.qtmultimedia # needed for overview feature
 
     # Add your packages here
     atop
@@ -42,7 +39,7 @@
     direnv # needed for zsh plugin and vscode
     fastfetch
     foot
-    gajim # Japper XMPP client 
+    gajim # Japper XMPP client
     git
     gcc
     git
@@ -72,5 +69,4 @@
     wget
     zig
   ];
-
-} 
+}
