@@ -15,10 +15,10 @@ in
     DEST="$HOME/.config/quickshell/overview"
     SRC="${overviewSource}"
     
-    if [ ! -d "$DEST" ]; then
-      mkdir -p "$HOME/.config/quickshell"
-      cp -R "$SRC" "$DEST"
-      chmod -R u+rwX "$DEST"
-    fi
+    mkdir -p "$HOME/.config/quickshell"
+    # Remove old directory and copy fresh (ensures QML updates are picked up)
+    rm -rf "$DEST"
+    cp -R "$SRC" "$DEST"
+    chmod -R u+rwX "$DEST"
   '';
 }
