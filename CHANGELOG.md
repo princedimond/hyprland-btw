@@ -12,6 +12,7 @@
   - Ran `nix fmt ./`
 - Removed permit insecure package for electron.
   - No longer needed
+- Removed duplicate home mgr config in flake.nix
 
 #### Hyprland-btw v0.3.0
 
