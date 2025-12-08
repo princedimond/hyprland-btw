@@ -50,14 +50,6 @@
         }
       ];
     };
-    # Standalone home-manager configuration
-    #    homeConfigurations."ddubs@nixos" = home-manager.lib.homeManagerConfiguration {
-    #      inherit pkgs;
-    #      extraSpecialArgs = {
-    #        inherit inputs;
-    #      }; # Pass flake inputs to our config
-    #      modules = [./home.nix];
-    #    };
 
     # Code formatter
     formatter.x86_64-linux = alejandra.defaultPackage.x86_64-linux;
