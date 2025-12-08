@@ -34,18 +34,11 @@
       cursorline = true;
       spell = true;
       spelllang = ["en"];
-      # Send all yanks/deletes to the system clipboard (Wayland/X11)
       clipboard = "unnamedplus";
     };
 
-    # Theme: Catppuccin (mocha)
-    colorschemes.catppuccin = {
-      enable = true;
-      settings = {
-        flavour = "mocha";
-        transparent_background = false;
-      };
-    };
+    # Theme: Tokyo Night
+    colorschemes.tokyonight.enable = true;
 
     plugins = {
       # UI and visuals
@@ -53,7 +46,7 @@
       lualine = {
         enable = true;
         settings = {
-          options = {theme = "catppuccin";};
+          options = {theme = "tokyonight";};
         };
       };
       bufferline.enable = true;
