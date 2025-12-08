@@ -6,6 +6,13 @@
 
 ## Inspired by: Tony,btw YouTube Video. (See README.md)
 
+#### Hyprland-btw v0.3.1
+
+- Added `alejandra` as formatter in `flake.nix`
+  - Ran `nix fmt ./`
+- Removed permit insecure package for electron.
+  - No longer needed
+
 #### Hyprland-btw v0.3.0
 
 - `nixvim` now uses `alejandra` for NIX formatting
