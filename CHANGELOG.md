@@ -6,6 +6,12 @@
 
 ## Inspired by: Tony,btw YouTube Video. (See README.md)
 
+#### Hyprland-btw v0.3.0
+
+- `nixvim` now uses `alejandra` for NIX formatting
+- Updated Flake
+- Updated Noctalia to current build
+
 #### Hyprland-btw v0.2.9
 
 - Ported `nixvim` updates from ddubsOS
