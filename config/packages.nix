@@ -46,7 +46,6 @@
     fastfetch
     foot
     gajim # Japper XMPP client
-    git
     gcc
     git
     gping
