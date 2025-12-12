@@ -69,17 +69,15 @@
       settings = {
         animation = "matrix";
         bigclock = true;
-        # --- Color Settings ---
-        # 1. Frame Color: Dark Blue (#00008B)
-        frame_color = "#00008B";
-        # 2. Login Text Color: Cyan (#00FFFF)
-        # This affects the "Username:", "Password:" prompts.
-        text_color = "#00FFFF";
-        # 3. Clock Color: Purple (#800080)
-        clock_color = "#800080";
-        # 4. Border Text Color: Red (#FF0000)
-        # This affects text like "F1 Shutdown", etc.
-        text_border_color = "#FF0000";
+        # --- Color Settings (0xAABBGGRR format) ---
+        # Background color of dialog box (Dark Blue: #00008B)
+        bg = "0x008B0000";
+        # Foreground text color (Cyan: #00FFFF)
+        fg = "0x00FFFF00";
+        # Border color (Red: #FF0000)
+        border_fg = "0x000000FF";
+        # Error message colors (keep default red)
+        error_fg = "0x01FF0000";
       };
     };
   };
