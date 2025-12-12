@@ -39,7 +39,6 @@
   # Disable this if you are installing on bare metal without QEMU/Spice.
   vm.guest-services.enable = true;
 
-
   # Add services
   services = {
     getty.autologinUser = null; # disable auto-login
@@ -56,13 +55,6 @@
       enable = true;
       pulse.enable = true;
     };
-    #    displayManager.ly = {
-    #      enable = true;
-    #      settings = {
-    #        animation = "matrix";
-    #        bigclock = "true";
-    #      };
-    #    };
 
     displayManager.ly = {
       enable = true;
@@ -78,7 +70,7 @@
         border_fg = "0x00FF0000";
         # Error message color (Red)
         error_fg = "0x00FF0000";
-        # Clock color (Purple: #800080) — this key is supported by Ly
+        # Clock color (Purple: #800080)
         clock_color = "#800080";
       };
     };
