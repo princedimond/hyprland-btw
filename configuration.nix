@@ -69,15 +69,17 @@
       settings = {
         animation = "matrix";
         bigclock = true;
-        # --- Color Settings (0xAABBGGRR format) ---
-        # Background color of dialog box (Dark Blue: #00008B)
-        bg = "0x008B0000";
+        # --- Color Settings (0xAARRGGBB) ---
+        # Background color of dialog box (Black)
+        bg = "0x00000000";
         # Foreground text color (Cyan: #00FFFF)
-        fg = "0x00FFFF00";
+        fg = "0x0000FFFF";
         # Border color (Red: #FF0000)
-        border_fg = "0x000000FF";
-        # Error message colors (keep default red)
-        error_fg = "0x01FF0000";
+        border_fg = "0x00FF0000";
+        # Error message color (Red)
+        error_fg = "0x00FF0000";
+        # Clock color (Purple: #800080) — this key is supported by Ly
+        clock_color = "#800080";
       };
     };
   };
