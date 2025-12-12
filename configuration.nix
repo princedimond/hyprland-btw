@@ -39,22 +39,6 @@
   # Disable this if you are installing on bare metal without QEMU/Spice.
   vm.guest-services.enable = true;
 
-  # Configure colors for ly
-  environment.etc."ly/config.conf".text = ''
-    animation = matrix
-    bigclock = true
-    # --- Color Settings ---
-    # 1. Frame Color: Dark Blue (#00008B)
-    frame_color = #00008B
-    # 2. Login Text Color: Cyan (#00FFFF)
-    # This affects the "Username:", "Password:" prompts.
-    text_color = #00FFFF
-    # 3. Clock Color: Purple (#800080)
-    clock_color = #800080
-    # 4. Border Text Color: Red (#FF0000)
-    # This affects text like "F1 Shutdown", etc.
-    text_border_color = #FF0000
-  '';
 
   # Add services
   services = {
@@ -82,6 +66,21 @@
 
     displayManager.ly = {
       enable = true;
+      settings = {
+        animation = "matrix";
+        bigclock = true;
+        # --- Color Settings ---
+        # 1. Frame Color: Dark Blue (#00008B)
+        frame_color = "#00008B";
+        # 2. Login Text Color: Cyan (#00FFFF)
+        # This affects the "Username:", "Password:" prompts.
+        text_color = "#00FFFF";
+        # 3. Clock Color: Purple (#800080)
+        clock_color = "#800080";
+        # 4. Border Text Color: Red (#FF0000)
+        # This affects text like "F1 Shutdown", etc.
+        text_border_color = "#FF0000";
+      };
     };
   };
 
