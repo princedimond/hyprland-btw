@@ -31,9 +31,11 @@
   # GPU/VM profile for this single-host system
   # Current host: VM with virtio GPU (no dedicated AMD/Intel/NVIDIA module enabled).
   # The installer will set exactly ONE of these to true based on your GPU profile:
-  drivers.amdgpu.enable = false; # AMD GPUs
-  drivers.intel.enable = false; # Intel iGPU
-  drivers.nvidia.enable = false; # NVIDIA GPUs
+  drivers = {
+    amdgpu.enable = false; # AMD GPUs
+    intel.enable = false; # Intel iGPU
+    nvidia.enable = false; # NVIDIA GPUs
+  };
 
   # Enable VM guest services via the drivers module when running in a VM.
   # Disable this if you are installing on bare metal without QEMU/Spice.
