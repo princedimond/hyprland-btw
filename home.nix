@@ -91,6 +91,7 @@ in {
       enableFishIntegration = true;
       git = true;
       extraOptions = [
+        "-all"
         "--group-directories-first"
         "--no-quotes"
         "--header" # Show header row
