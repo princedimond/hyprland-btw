@@ -10,21 +10,21 @@
   keybindsMenu = import ./config/scripts/keybinds.nix {inherit pkgs;};
 in {
   imports = [
-    ./config/editors/nixvim.nix # Nixvim NeoVIM config
     ./config/cli/git.nix #config git settings AND username/EMail
     ./config/cli/htop.nix # htop monitor
     ./config/cli/cava.nix # Audio visualize Dracula theme (others in file)
+    ./config/editors/vscode.nix # w/plugins and nero hyprland theme
+    ./config/editors/nixvim.nix # Nixvim NeoVIM config
     #./config/editors/nvf.nix # nvf alternate NVIM config
     ./config/noctalia.nix # Noctalia QuickShell wiring (fronm ddubsos)
-    ./config/overview.nix # Quickshell-overview workspace preview
-    ./config/editors/vscode.nix # w/plugins and nero hyprland theme
     ./config/noctalia.nix # Noctalia QuickShell wiring (fronm ddubsos)
+    ./config/overview.nix # Quickshell-overview workspace preview
     ./config/terminals/kitty.nix #kitty term and kitty-bg (background in kitty)
-    ./config/terminals/ghostty.nix
-    ./config/terminals/wezterm.nix
+    ./config/terminals/ghostty.nix # Ghostty and ghostty-bg
+    ./config/terminals/wezterm.nix # Wezterm terminal
     ./config/terminals/alacritty.nix
+    ./config/yazi/default.nix # TUI File Manager
     ./config/zsh.nix # Cfg zsh from @justaguylinux
-    ./config/yazi/default.nix
   ];
   home = {
     username = lib.mkDefault "dwilliams";
