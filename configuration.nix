@@ -1,7 +1,6 @@
-{
-  pkgs,
-  config,
-  ...
+{ pkgs
+, config
+, ...
 }: {
   imports = [
     ./hardware-configuration.nix
@@ -62,7 +61,7 @@
       enable = true;
       settings = {
         animation = "matrix";
-        bigclock = true;
+        pbigclock = true;
         # --- Color Settings (0xAARRGGBB) ---
         # Background color of dialog box (Black)
         bg = "0x00000000";
@@ -103,7 +102,7 @@
   # Define the primary user account. Don't forget to set a password with ‘passwd’.
   users.users."dwilliams" = {
     isNormalUser = true;
-    extraGroups = ["wheel" "input"]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "input" ]; # Enable ‘sudo’ for the user.
     shell = pkgs.zsh; # default login shell
     packages = with pkgs; [
       tree
@@ -123,9 +122,9 @@
 
   systemd.services.flatpak-add-flathub = {
     description = "Add Flathub Flatpak remote";
-    wantedBy = ["multi-user.target"];
-    wants = ["network-online.target"];
-    after = ["network-online.target" "flatpak-system-helper.service"];
+    wantedBy = [ "multi-user.target" ];
+    wants = [ "network-online.target" ];
+    after = [ "network-online.target" "flatpak-system-helper.service" ];
     serviceConfig = {
       Type = "oneshot";
     };
@@ -141,7 +140,7 @@
   };
 
   nixpkgs.config.allowUnfree = true;
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   security.sudo.wheelNeedsPassword = false;
   system.stateVersion = "25.11"; # Did you read the comment?
 }

@@ -14,7 +14,8 @@ in {
     ./config/cli/htop.nix # htop monitor
     ./config/cli/cava.nix # Audio visualize Dracula theme (others in file)
     ./config/editors/vscode.nix # w/plugins and nero hyprland theme
-    ./config/editors/nixvim.nix # Nixvim NeoVIM config
+    ./config/editors/bugsvim.nix # bugsvim NeoVIM config
+    #./config/editors/nixvim.nix # Nixvim NeoVIM config
     #./config/editors/nvf.nix # nvf alternate NVIM config
     ./config/noctalia.nix # Noctalia QuickShell wiring (fronm ddubsos)
     ./config/noctalia.nix # Noctalia QuickShell wiring (fronm ddubsos)
