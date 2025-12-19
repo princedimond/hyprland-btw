@@ -48,6 +48,7 @@ in {
       fd
       tree-sitter
       git
+      gnumake
     ];
   };
 
