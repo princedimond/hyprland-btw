@@ -7,7 +7,7 @@
   # Reference the local bugsvim config directory in this repo
   bugsvimSrc = ./bugsvim-nvim;
 in {
-  programs.neovim = {
+  programs.neovim = lib.mkForce {
     enable = true;
     defaultEditor = false;
     vimAlias = false;
