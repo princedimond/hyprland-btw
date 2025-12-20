@@ -48,6 +48,7 @@
     tumbler.enable = true;
     envfs.enable = true;
     seatd.enable = true;
+    upower.enable = true;
     gnome.gnome-keyring.enable = true;
     libinput.enable = true;
     # Default XKB layout for Hyprland/X11 (overridden by installer).

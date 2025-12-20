@@ -6,6 +6,14 @@
 
 ## Inspired by: Tony,btw YouTube Video. (See README.md)
 
+#### Hyprland-btw v0.3.2
+
+- Removed: duplicate rofi-legacy.menu.nix file
+  - Thanks @Ducky for finding this
+- Added: `upower.enable=true;
+  - Resolves issue with noctalia-shell and laptop batteries
+  - Thanks @Prince for fixing this
+
 #### Hyprland-btw v0.3.1
 
 - Added `alejandra` as formatter in `flake.nix`
