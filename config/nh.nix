@@ -2,7 +2,7 @@
   programs.nh = {
     enable = true;
     clean = {
-      enable = true;
+      enable = false;
       extraArgs = "--keep-since 7d --keep 5";
     };
     flake = "/home/$USER/hyprland-btw";

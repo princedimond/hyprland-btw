@@ -118,6 +118,16 @@
   #   ];
   # };
 
+  # trying standard Garbage collection
+  #  `nh` might not be working
+  #  I disabled GC in config/nh.nix for now
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
+
   systemd.services.flatpak-add-flathub = {
     description = "Add Flathub Flatpak remote";
     wantedBy = ["multi-user.target"];
