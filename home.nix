@@ -116,8 +116,7 @@ in {
     };
     # Optional: uncomment for Dracula icons
     iconTheme = {
-      name = "candy-icons";
-      package = pkgs.candy-icons;
+      name = "al-beautyline";
     };
     gtk3.extraConfig = {
       "gtk-application-prefer-dark-theme" = 1;
@@ -141,6 +140,9 @@ in {
       fi
     done
   '';
+
+  # Link local icon theme
+  home.file.".local/share/icons/al-beautyline".source = ./config/local.icons/al-beautyline;
 
   # Config apps
   home.file.".config/hypr".source = ./config/hypr;
