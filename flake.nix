@@ -26,19 +26,16 @@
     ...
   }: let
     system = "x86_64-linux";
-    pkgs = import nixpkgs {
-      inherit system;
-      config = {
-        allowUnfree = true;
-      };
-      overlays = [
-        (import ./modules/tumbler-overlay.nix)
-      ];
-    };
   in {
     nixosConfigurations.hyprland-btw = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
+        {
+          nixpkgs.overlays = [
+            (import ./modules/tumbler-overlay.nix)
+          ];
+          nixpkgs.config.allowUnfree = true;
+        }
         ./configuration.nix
         ./config/nh.nix
         ./modules/drivers/default.nix
