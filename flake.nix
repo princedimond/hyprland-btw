@@ -31,9 +31,6 @@
       system = "x86_64-linux";
       modules = [
         {
-          nixpkgs.overlays = [
-            (import ./modules/tumbler-overlay.nix)
-          ];
           nixpkgs.config.allowUnfree = true;
         }
         ./configuration.nix
