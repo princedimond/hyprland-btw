@@ -126,12 +126,7 @@ in {
     };
   };
 
-  # Force Home Manager to overwrite gtk config files
-  xdg.configFile."gtk-3.0/gtk.css".force = true;
-  xdg.configFile."gtk-4.0/gtk.css".force = true;
-  xdg.configFile."gtk-4.0/settings.ini".force = true;
-
-  # Seed wallpapers once into ~/Pictures/Wallpapers (Noctalia default), without overwriting user changes
+  # Seed wallpapers
   home.activation.seedWallpapers = lib.hm.dag.entryAfter ["writeBoundary"] ''
     set -eu
     SRC=${./config/wallpapers}
