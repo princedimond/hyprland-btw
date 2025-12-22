@@ -2,10 +2,10 @@
   description = "Hyprland on Nixos";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/release-25.11";
-    #nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    #nixpkgs.url = "github:nixos/nixpkgs/release-25.11";
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixvim.url = "github:nix-community/nixvim";
