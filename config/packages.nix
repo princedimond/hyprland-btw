@@ -52,23 +52,22 @@
     google-chrome
     htop
     hyfetch
-    inxi
+    inxi # diagnostic utils
     kitty
     bibata-cursors
-    lunarvim # Alternate neovim (lvim)
+    #lunarvim # Alternate neovim (lvim)
     luarocks # LUA for nevoim
     mdcat
     mesa-demos # needed for inxi
-    ncdu
+    ncdu # show diskusage
     nh # Nix Helper
     nixd # nix lsp
-    onefetch
+    onefetch # git repo fetch
     onlyoffice-desktopeditors
     pciutils
-    ranger
     ripgrep
     rustup
-    starship
+    starship # custom prompt
     tmux #Terminal mux with hybridd ddubs-tonybtw config
     ugrep
     wget
