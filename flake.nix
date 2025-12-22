@@ -31,6 +31,9 @@
       config = {
         allowUnfree = true;
       };
+      overlays = [
+        (import ./modules/tumbler-overlay.nix)
+      ];
     };
   in {
     nixosConfigurations.hyprland-btw = nixpkgs.lib.nixosSystem {

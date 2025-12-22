@@ -41,11 +41,11 @@
   services = {
     getty.autologinUser = null; # disable auto-login
     openssh.enable = true;
-    tumbler.enable = false;
+    tumbler.enable = true;
     envfs.enable = true;
     seatd.enable = true;
     upower.enable = true;
-    gnome.gnome-keyring.enable = false;
+    gnome.gnome-keyring.enable = true;
     libinput.enable = true;
     # Default XKB layout for Hyprland/X11 (overridden by installer).
     xserver.xkb.layout = "us";
