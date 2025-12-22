@@ -6,6 +6,16 @@
 
 ## Inspired by: Tony,btw YouTube Video. (See README.md)
 
+#### Hyprland-btw v0.3.3
+
+- `bugsvim` to current version with `blink-cmp`
+- Icons changed from nixpkgs `candy-icons` to local `al-beautyline`
+- Disabled `nh` garbage collect
+  - Enabled `nic.gc` in `configuration.nix`
+  - `nh` didn't seem to be purging old generations
+- Set home manager to backup conflicting files during rebuilds
+- Updated version to v0.3.3
+
 #### Hyprland-btw v0.3.2
 
 - Removed: duplicate rofi-legacy.menu.nix file
