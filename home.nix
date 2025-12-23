@@ -7,7 +7,7 @@ let
 in
 {
   imports = [
-    ./config/editors/nixvim.nix # Nixvim NeoVIM config 
+    #./config/editors/nixvim.nix # Nixvim NeoVIM config 
     ./config/cli/git.nix #config git settings AND username/EMail
     ./config/cli/htop.nix # htop monitor
     ./config/cli/cava.nix # Audio visualize Dracula theme (others in file)
@@ -15,17 +15,18 @@ in
     ./config/noctalia.nix # Noctalia QuickShell wiring (fronm ddubsos)
     ./config/overview.nix # Quickshell-overview workspace preview
     ./config/editors/vscode.nix # w/plugins and nero hyprland theme
+    ./config/editors/evil-helix.nix # w/plugins and catppuccin mocha theme
     ./config/noctalia.nix # Noctalia QuickShell wiring (fronm ddubsos)
-    ./config/terminals/kitty.nix #kitty term and kitty-bg (background in kitty)
+    #./config/terminals/kitty.nix #kitty term and kitty-bg (background in kitty)
     ./config/terminals/ghostty.nix
-    ./config/terminals/wezterm.nix
-    ./config/terminals/alacritty.nix
+    #./config/terminals/wezterm.nix
+    #./config/terminals/alacritty.nix
     ./config/zsh.nix # Cfg zsh from @justaguylinux
     ./config/yazi/default.nix
   ];
   home = {
-    username = lib.mkDefault "dwilliams";
-    homeDirectory = lib.mkDefault "/home/dwilliams";
+    username = lib.mkDefault "princedimond";
+    homeDirectory = lib.mkDefault "/home/princedimond";
     stateVersion = "25.11";
     sessionVariables = {
       # GTK_THEME = "Adwaita:dark";
@@ -42,7 +43,7 @@ in
   programs = {
     neovim = {
       enable = false; # Now managed by nixvim.nix
-      defaultEditor = true;
+      defaultEditor = false;
     };
     bash = {
       enable = true;

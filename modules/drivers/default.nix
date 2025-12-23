@@ -5,5 +5,6 @@
     ./intel-drivers.nix
     ./nvidia-drivers.nix
     ./vm-guest-services.nix
+    ./chrome-device.nix
   ];
 }

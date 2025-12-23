@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, pkgs-unstable, ... }: {
   #  Add packages below.
 
   environment.systemPackages = with pkgs; [
@@ -17,6 +17,7 @@
     cliphist
     grim
     quickshell
+    libinput-gestures
     slurp
     nwg-look
     rofi
@@ -32,46 +33,52 @@
     qt6.qtmultimedia
 
     # Add your packages here
+    alejandra
     atop
     bat
     btop
-    bottom
+    #bottom
     cargo
     clang
     curl
     coreutils
-    dino # Jabber XMPP Client
+    #dino # Jabber XMPP Client
     direnv # needed for zsh plugin and vscode
     fastfetch
-    foot
-    gajim # Japper XMPP client
+    ferdium
+    #foot
+    #gajim # Japper XMPP client
     git
     gcc
+    gh
     git
+    gitkraken
     gping
-    google-chrome
-    htop
+    #htop
     hyfetch
     inxi
-    kitty
+    #kitty
     bibata-cursors
-    lunarvim # Alternate neovim (lvim)
+    #lunarvim # Alternate neovim (lvim)
     luarocks # LUA for nevoim
     mdcat
     mesa-demos # needed for inxi
+    meld
+    microsoft-edge
     ncdu
-    nh # Nix Helper
-    nixd # nix lsp
+    #nixd # nix lsp
     onefetch
     onlyoffice-desktopeditors
     pciutils
-    ranger
+    #ranger
     ripgrep
     rustup
     starship
     tmux #Terminal mux with hybridd ddubs-tonybtw config
     ugrep
+    warp-terminal
     wget
     zig
-  ];
+    ] ++ (with pkgs-unstable; [
+      zed-editor ]);
 }
