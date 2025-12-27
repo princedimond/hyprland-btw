@@ -82,6 +82,10 @@
       withUWSM = false;
     };
     firefox.enable = false;
+    neovim = {
+      enable = true;
+      defaultEditor = true;
+    };
     thunar.enable = true;
     mtr.enable = true;
     gnupg.agent = {
