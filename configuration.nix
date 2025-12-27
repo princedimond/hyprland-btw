@@ -55,27 +55,29 @@
       pulse.enable = true;
     };
 
-    displayManager.ly = {
+    # ly display manager - disabled due to issues with user filtering
+    # displayManager.ly = {
+    #   enable = true;
+    #   settings = {
+    #     animation = "matrix";
+    #     pbigclock = true;
+    #     bg = "0x00000000";
+    #     fg = "0x0000FFFF";
+    #     border_fg = "0x00FF0000";
+    #     error_fg = "0x00FF0000";
+    #     clock_color = "#800080";
+    #   };
+    # };
+
+    # greetd with tuigreet - TUI display manager that properly hides system users
+    greetd = {
       enable = true;
-      settings = {
-        animation = "matrix";
-        bigclock = true;
-        # --- Color Settings (0xAARRGGBB) ---
-        # Background color of dialog box (Black)
-        bg = "0x00000000";
-        # Foreground text color (Cyan: #00FFFF)
-        fg = "0x0000FFFF";
-        # Border color (Red: #FF0000)
-        border_fg = "0x00FF0000";
-        # Error message color (Red)
-        error_fg = "0x00FF0000";
-        # Clock color (Purple: #800080)
-        clock_color = "#800080";
-        # Only show normal users (UID >= 1000), hide system/nix build users
-        min_uid = 1000;
-        max_uid = 60000;
-        # Also explicitly hide system and nix build users by name
-        hide_users = "root,nobody,_flatpak,systemd-timesync,systemd-network,systemd-resolve,systemd-coredump,ntp,nixbld,nixbld1,nixbld2,nixbld3,nixbld4,nixbld5,nixbld6,nixbld7,nixbld8,nixbld9,nixbld10,nixbld11,nixbld12,nixbld13,nixbld14,nixbld15,nixbld16,nixbld17,nixbld18,nixbld19,nixbld20,nixbld21,nixbld22,nixbld23,nixbld24,nixbld25,nixbld26,nixbld27,nixbld28,nixbld29,nixbld30,nixbld31,nixbld32";
+      settings = rec {
+        initial_session = {
+          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --cmd Hyprland --user-menu";
+          user = "greeter";
+        };
+        default_session = initial_session;
       };
     };
   };
