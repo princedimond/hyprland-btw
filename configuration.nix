@@ -71,6 +71,9 @@
         error_fg = "0x00FF0000";
         # Clock color (Purple: #800080)
         clock_color = "#800080";
+        # Only show normal users (UID >= 1000), hide system/nix build users
+        min_uid = 1000;
+        max_uid = 60000;
       };
     };
   };
