@@ -6,6 +6,14 @@
 
 ## Inspired by: Tony,btw YouTube Video. (See README.md)
 
+#### Hyprland-btw v0.3.4
+
+- Removed Java from `bugsvim.nix`
+- Updated `nixvim.nix` to current configuraiton
+  - nearly identical to `bugsvim`
+- Added user systemd service for `noctalia-shell`
+- Updated Hyprland bindings to accomodate the change
+
 #### Hyprland-btw v0.3.3
 
 - `bugsvim` to current version with `blink-cmp`
