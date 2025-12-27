@@ -37,7 +37,7 @@
     bat
     btop
     bottom
-    cargo
+    #cargo
     clang
     curl
     coreutils
@@ -66,7 +66,7 @@
     onlyoffice-desktopeditors
     pciutils
     ripgrep
-    rustup
+    #rustup
     starship # custom prompt
     tmux #Terminal mux with hybridd ddubs-tonybtw config
     ugrep
