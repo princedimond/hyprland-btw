@@ -37,7 +37,7 @@
     bat
     btop
     bottom
-    cargo
+    #cargo
     clang
     curl
     coreutils
