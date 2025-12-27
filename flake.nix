@@ -41,7 +41,12 @@
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
+            # Default: supports the installer-configured user or default 'dwilliams'
+            # The installer patches this username when creating a new system
+            # For existing clones, add additional users below if needed
             users."dwilliams" = import ./home.nix;
+            # To add another user, uncomment and adjust:
+            # users."username" = import ./home.nix;
             backupFileExtension = "backup";
             extraSpecialArgs = {inherit inputs;};
           };
