@@ -11,23 +11,23 @@ in {
       #inputs.chaotic.packages.${pkgs.stdenv.hostPlatform.system}.evil-helix_git
       evil-helix
       #cmake-language-server  # pygls fails to build 8/25/25
-      jsonnet-language-server
-      luaformatter
-      lua-language-server
-      marksman
-      taplo
+      #jsonnet-language-server
+      #luaformatter
+      #lua-language-server
+      #marksman
+      #taplo
       nixd
       nil
-      jq-lsp
-      vscode-langservers-extracted
-      bash-language-server
-      awk-language-server
-      vscode-extensions.llvm-vs-code-extensions.vscode-clangd
-      clang-tools
-      docker-compose-language-service
-      docker-compose
-      docker-language-server
-      typescript-language-server
+      #jq-lsp
+      #vscode-langservers-extracted
+      #bash-language-server
+      #awk-language-server
+      #vscode-extensions.llvm-vs-code-extensions.vscode-clangd
+      #clang-tools
+      #docker-compose-language-service
+      #docker-compose
+      #docker-language-server
+      #typescript-language-server
     ]
     else []
   );

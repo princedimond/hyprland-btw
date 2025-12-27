@@ -1,4 +1,10 @@
-{ config, pkgs, inputs, lib, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  lib,
+  ...
+}:
 
 let
   rofiLegacyMenu = import ./config/scripts/rofi-legacy.menu.nix { inherit pkgs; };
@@ -7,11 +13,11 @@ let
 in
 {
   imports = [
-    #./config/editors/nixvim.nix # Nixvim NeoVIM config 
-    ./config/cli/git.nix #config git settings AND username/EMail
+    #./config/editors/nixvim.nix # Nixvim NeoVIM config
+    ./config/cli/git.nix # config git settings AND username/EMail
     ./config/cli/htop.nix # htop monitor
     ./config/cli/cava.nix # Audio visualize Dracula theme (others in file)
-    #./config/editors/nvf.nix # nvf alternate NVIM config 
+    #./config/editors/nvf.nix # nvf alternate NVIM config
     ./config/noctalia.nix # Noctalia QuickShell wiring (fronm ddubsos)
     ./config/overview.nix # Quickshell-overview workspace preview
     ./config/editors/vscode.nix # w/plugins and nero hyprland theme
@@ -30,13 +36,15 @@ in
     stateVersion = "25.11";
     sessionVariables = {
       # GTK_THEME = "Adwaita:dark";
-      GTK_THEME = "Dracula";
+      #GTK_THEME = "Dracula";
+      GTK_THEME = "catppuccin-mocha";
     };
     packages = [
       rofiLegacyMenu
       configMenu
       keybindsMenu
-      pkgs.dracula-theme
+      #pkgs.dracula-theme
+      pkgs.catppuccin-gtk
     ];
   };
 
@@ -49,7 +57,7 @@ in
       enable = true;
       shellAliases = {
         ll = "eza -la --group-dirs-first --icons";
-        v = "nvim";
+        v = "hx";
         rebuild = "sudo nixos-rebuild switch --flake ~/hyprland-btw/";
         update = "nix flake update --flake ~/hyprland-btw && sudo nixos-rebuild switch --flake ~/hyprland-btw/";
       };
@@ -64,7 +72,8 @@ in
         if [ -z "$WAYLAND_DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
           #exec uwsm start -S hyprland-uwsm.desktop
           # export GTK_THEME=Adwaita:dark
-          export GTK_THEME=Dracula
+          #export GTK_THEME=Dracula
+          export GTK_THEME=catppuccin-mocha
           exec Hyprland
         fi
       '';
@@ -99,16 +108,25 @@ in
     };
   };
 
-  # Dracula theme configuration
+  /*
+    # Dracula theme configuration
+    gtk = {
+      enable = true;
+      theme = {
+        name = "Dracula";
+        package = pkgs.dracula-theme;
+        #package = pkgs.tokyonight-gtk-theme;
+        #Dark (Blue Accent): "Tokyonight-Dark-B"
+        #Dark (Moon Accent): "Tokyonight-Dark-Moon"
+        #Storm (Gray/Muted Accent): "Tokyonight-Storm-B"
+      };
+  */
+  # Catppuccin theme configuration
   gtk = {
     enable = true;
     theme = {
-      name = "Dracula";
-      package = pkgs.dracula-theme;
-      #package = pkgs.tokyonight-gtk-theme;
-      #Dark (Blue Accent): "Tokyonight-Dark-B"
-      #Dark (Moon Accent): "Tokyonight-Dark-Moon"
-      #Storm (Gray/Muted Accent): "Tokyonight-Storm-B"
+      name = "catppuccin-mocha";
+      package = pkgs.catppuccin-gtk;
     };
     # Optional: uncomment for Dracula icons
     iconTheme = {
