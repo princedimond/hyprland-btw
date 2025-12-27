@@ -30,4 +30,22 @@ in {
       chmod -R u+rwX "$DEST"
     fi
   '';
+
+  # Enable noctalia-shell systemd user service
+  systemd.user.services.noctalia-shell = {
+    Unit = {
+      Description = "Noctalia Shell Service";
+      PartOf = [ "graphical-session.target" ];
+      After = [ "graphical-session-pre.target" ];
+    };
+    Service = {
+      Type = "simple";
+      ExecStart = "${inputs.noctalia.packages.${system}.default}/bin/noctalia-shell";
+      Restart = "on-failure";
+      RestartSec = 5;
+    };
+    Install = {
+      WantedBy = [ "graphical-session.target" ];
+    };
+  };
 }
