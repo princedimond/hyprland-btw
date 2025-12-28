@@ -18,7 +18,6 @@ in {
     #./config/editors/nixvim.nix # Nixvim NeoVIM config
     #./config/editors/nvf.nix # nvf alternate NVIM config
     ./config/noctalia.nix # Noctalia QuickShell wiring (fronm ddubsos)
-    ./config/noctalia.nix # Noctalia QuickShell wiring (fronm ddubsos)
     ./config/overview.nix # Quickshell-overview workspace preview
     ./config/terminals/kitty.nix #kitty term and kitty-bg (background in kitty)
     ./config/terminals/ghostty.nix # Ghostty and ghostty-bg
