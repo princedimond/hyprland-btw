@@ -83,7 +83,7 @@
     # Making it confusing for new users
     # You can enable this and manually set to your username
     displayManager.ly = {
-      enable = false;
+      enable = true;
       settings = {
         animation = "matrix";
         bigclock = true;
@@ -99,7 +99,7 @@
 
     # greetd with tuigreet - TUI display manager that properly hides system users
     greetd = {
-      enable = true;
+      enable = false;
       settings = rec {
         initial_session = {
           command = "${pkgs.tuigreet}/bin/tuigreet --cmd Hyprland --user-menu";

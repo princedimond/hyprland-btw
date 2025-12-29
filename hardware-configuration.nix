@@ -47,5 +47,7 @@
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.ens18.useDHCP = lib.mkDefault true;
 
+  security.sudo.wheelNeedsPassword = lib.mkDefault false;
+
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }
