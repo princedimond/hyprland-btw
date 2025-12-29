@@ -3,6 +3,7 @@
     ./hardware-configuration.nix
     ./config/fonts.nix
     ./config/packages.nix
+    ./config/virtualization.nix #  Emable docker,podman,virtmgr
   ];
 
   boot = {
@@ -139,7 +140,7 @@
   # Define the primary user account. Don't forget to set a password with ‘passwd’.
   users.users."dwilliams" = {
     isNormalUser = true;
-    extraGroups = ["wheel" "input"]; # Enable ‘sudo’ for the user.
+    extraGroups = ["wheel" "input" "docker" "video" "libvirtd"]; # Enable ‘sudo’ for the user.
     shell = pkgs.zsh; # default login shell
     packages = with pkgs; [
       tree

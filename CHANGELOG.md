@@ -6,13 +6,28 @@
 
 ## Inspired by: Tony,btw YouTube Video. (See README.md)
 
+#### Hyprland-btw v0.3.5
+
+- Added `virtualization.nix`
+  - Managed docker,podman, libvirt and virtmgr
+- Added pipewire `low-latency` configuration
+- Noctalia imported twice. (Thanks Prince)
+- Moved default login mgr to `tuigreet`
+  - `ly` won't mask `nixbldxxx` users
+  - Makes the initial login confusing as username not there
+  - You have to scroll through users, and change to `hyprland`
+  - Hopefully that will get fixed
+  - Code is still in place, just disabled
+- Added `NeoVIM` to system packages
+  - was only in home mgr so root did not have it
+
 #### Hyprland-btw v0.3.4
 
 - Removed Java from `bugsvim.nix`
-- Updated `nixvim.nix` to current configuraiton
+- Updated `nixvim.nix` to current configuration
   - nearly identical to `bugsvim`
 - Added user systemd service for `noctalia-shell`
-- Updated Hyprland bindings to accomodate the change
+- Updated Hyprland bindings to accommodate the change
 
 #### Hyprland-btw v0.3.3
 

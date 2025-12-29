@@ -10,21 +10,26 @@
   keybindsMenu = import ./config/scripts/keybinds.nix {inherit pkgs;};
 in {
   imports = [
+    ./config/terminals/alacritty.nix
+    ./config/editors/bugsvim.nix # bugsvim NeoVIM config
+    ./config/cli/cava.nix # Audio visualize Dracula theme (others in file)
+    ./config/yazi/default.nix # TUI File Manager
+    ./config/terminals/ghostty.nix # Ghostty and ghostty-bg
     ./config/cli/git.nix #config git settings AND username/EMail
     ./config/cli/htop.nix # htop monitor
-    ./config/cli/cava.nix # Audio visualize Dracula theme (others in file)
-    ./config/editors/vscode.nix # w/plugins and nero hyprland theme
-    ./config/editors/bugsvim.nix # bugsvim NeoVIM config
-    #./config/editors/nixvim.nix # Nixvim NeoVIM config
-    #./config/editors/nvf.nix # nvf alternate NVIM config
+    ./config/terminals/kitty.nix #kitty term and kitty-bg (background in kitty)
     ./config/noctalia.nix # Noctalia QuickShell wiring (fronm ddubsos)
     ./config/overview.nix # Quickshell-overview workspace preview
-    ./config/terminals/kitty.nix #kitty term and kitty-bg (background in kitty)
-    ./config/terminals/ghostty.nix # Ghostty and ghostty-bg
     ./config/terminals/wezterm.nix # Wezterm terminal
-    ./config/terminals/alacritty.nix
-    ./config/yazi/default.nix # TUI File Manager
+    ./config/editors/vscode.nix # w/plugins and nero hyprland theme
     ./config/zsh.nix # Cfg zsh from @justaguylinux
+    ######################################################################
+    # These are two alternate nvim configs
+    # Nixvim is now nearly idendtical to bugsvim
+    # In future I will most likely switch to nixvim
+    #./config/editors/nixvim.nix # Nixvim NeoVIM config
+    #./config/editors/nvf.nix # nvf alternate NVIM config
+    ######################################################################
   ];
   home = {
     username = lib.mkDefault "dwilliams";
