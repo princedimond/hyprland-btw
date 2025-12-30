@@ -6,6 +6,13 @@
 
 ## Inspired by: Tony,btw YouTube Video. (See README.md)
 
+#### Hyprland-btw v0.3.6
+
+- Added `st` terminal from `gh0st` repo
+  - [gh0stzk](https://github.com/gh0stzk/st-terminal)
+  - Well featured with image support
+  - Fast, low mem usuage
+
 #### Hyprland-btw v0.3.5
 
 - Added `virtualization.nix`

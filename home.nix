@@ -23,6 +23,8 @@ in {
     ./config/terminals/wezterm.nix # Wezterm terminal
     ./config/editors/vscode.nix # w/plugins and nero hyprland theme
     ./config/zsh.nix # Cfg zsh from @justaguylinux
+    # Build and install gh0stzk/st (st-graphics) on rebuilds
+    ./config/terminals/st-gh0stzk.nix
     ######################################################################
     # These are two alternate nvim configs
     # Nixvim is now nearly idendtical to bugsvim
