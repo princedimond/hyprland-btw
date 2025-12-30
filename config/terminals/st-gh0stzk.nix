@@ -70,4 +70,17 @@ in
       exec st "$@"
     '')
   ];
+
+  # Ensure a .desktop file exists in ~/.local/share/applications so rofi (drun) sees it.
+  xdg.desktopEntries.st-gh0stzk = {
+    name = "st (gh0stzk)";
+    genericName = "Terminal";
+    comment = "Simple Terminal (suckless) — gh0stzk build";
+    exec = "st";
+    tryExec = "st";
+    icon = "utilities-terminal";
+    terminal = false;
+    categories = [ "System" "TerminalEmulator" ];
+    keywords = [ "terminal" "st" "suckless" "shell" "cli" ];
+  };
 }
