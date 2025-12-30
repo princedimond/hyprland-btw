@@ -83,7 +83,7 @@ in
     # Extra keys not modeled by HM go under `settings`
     settings = {
       TryExec = "st";
-      Keywords = [ "terminal" "st" "suckless" "shell" "cli" ];
+      Keywords = "terminal;st;suckless;shell;cli;";
       StartupWMClass = "st-256color";
     };
   };
