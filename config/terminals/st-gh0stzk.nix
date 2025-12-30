@@ -51,10 +51,9 @@ let
 in
 {
   # Install the terminal for the user/session. You can move this to system packages if preferred.
-  home.packages = [ st-gh0stzk ];
-
-  # Optional: provide an alternate launcher name to avoid collisions
-  home.packages = home.packages or [] ++ [
+  home.packages = [
+    st-gh0stzk
+    # Optional: alternate launcher name to avoid collisions
     (pkgs.writeShellScriptBin "st-gh0stzk" ''
       exec st "$@"
     '')
