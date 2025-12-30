@@ -3,7 +3,12 @@ let
   st-gh0stzk = pkgs.stdenv.mkDerivation rec {
     pname = "st-gh0stzk";
     version = "0.9.2-graphics";
-    src = ./st-terminal;
+    src = pkgs.fetchFromGitHub {
+      owner = "gh0stzk";
+      repo = "st-terminal";
+      rev = "2cff9e2559932245ec7d13302a52212d4d823e54"; # pinned 2025-12-30
+      sha256 = "02mqwp4x1kvqm9x07s1xfd124j7f0j0nvwjw15fswx7154ihhpwh";
+    };
 
     nativeBuildInputs = [
       pkgs.pkg-config
