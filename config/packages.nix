@@ -50,6 +50,7 @@
     git
     gping
     google-chrome
+    gnumake
     htop
     hyfetch
     inxi # diagnostic utils
