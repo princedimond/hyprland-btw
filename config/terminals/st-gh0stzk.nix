@@ -81,6 +81,11 @@ in
     icon = "utilities-terminal";
     terminal = false;
     categories = [ "System" "TerminalEmulator" ];
-    keywords = [ "terminal" "st" "suckless" "shell" "cli" ];
+    # Extra keys not modeled by HM go under `settings`
+    settings = {
+      Keywords = [ "terminal" "st" "suckless" "shell" "cli" ];
+      StartupWMClass = "st-256color";
+      Type = "Application";
+    };
   };
 }
