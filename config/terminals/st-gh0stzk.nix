@@ -77,15 +77,14 @@ in
     genericName = "Terminal";
     comment = "Simple Terminal (suckless) — gh0stzk build";
     exec = "st";
-    tryExec = "st";
     icon = "utilities-terminal";
     terminal = false;
     categories = [ "System" "TerminalEmulator" ];
     # Extra keys not modeled by HM go under `settings`
     settings = {
+      TryExec = "st";
       Keywords = [ "terminal" "st" "suckless" "shell" "cli" ];
       StartupWMClass = "st-256color";
-      Type = "Application";
     };
   };
 }
