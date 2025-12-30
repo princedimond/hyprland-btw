@@ -26,6 +26,13 @@ let
       pkgs.xorg.libXinerama
     ];
 
+    # Make the default font match your setup (Maple Mono NF is already used elsewhere in this repo)
+    postPatch = ''
+      substituteInPlace config.def.h \
+        --replace 'JetBrainsMono Nerd Font:pixelsize=13:antialias=true:autohint=true' \
+                  'Maple Mono NF:size=12:antialias=true:autohint=true';
+    '';
+
     # The upstream Makefile installs terminfo globally via `tic`. We install into $out
     # and place desktop/man under $out as well, so the package is self-contained.
     buildPhase = ''
