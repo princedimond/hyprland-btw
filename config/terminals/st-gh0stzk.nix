@@ -1,5 +1,8 @@
-{ pkgs, lib, ... }:
-let
+{
+  pkgs,
+  lib,
+  ...
+}: let
   st-gh0stzk = pkgs.stdenv.mkDerivation rec {
     pname = "st-gh0stzk";
     version = "0.9.2-graphics";
@@ -60,8 +63,7 @@ let
       maintainers = [];
     };
   };
-in
-{
+in {
   # Install the terminal for the user/session. You can move this to system packages if preferred.
   home.packages = [
     st-gh0stzk
@@ -79,7 +81,7 @@ in
     exec = "st";
     icon = "utilities-terminal";
     terminal = false;
-    categories = [ "System" "TerminalEmulator" ];
+    categories = ["System" "TerminalEmulator"];
     # Extra keys not modeled by HM go under `settings`
     settings = {
       TryExec = "st";

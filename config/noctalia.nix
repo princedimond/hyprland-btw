@@ -35,8 +35,8 @@ in {
   systemd.user.services.noctalia-shell = {
     Unit = {
       Description = "Noctalia Shell Service";
-      PartOf = [ "graphical-session.target" ];
-      After = [ "graphical-session-pre.target" ];
+      PartOf = ["graphical-session.target"];
+      After = ["graphical-session-pre.target"];
     };
     Service = {
       Type = "simple";
@@ -45,7 +45,7 @@ in {
       RestartSec = 5;
     };
     Install = {
-      WantedBy = [ "graphical-session.target" ];
+      WantedBy = ["graphical-session.target"];
     };
   };
 }

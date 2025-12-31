@@ -563,7 +563,7 @@
 
     extraPlugins = with pkgs.vimPlugins; [
       telescope-media-files-nvim
-      nui-nvim  # Required by snacks and noice
+      nui-nvim # Required by snacks and noice
     ];
 
     # Diagnostic UI and notify background tweaks
