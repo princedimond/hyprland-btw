@@ -35,6 +35,7 @@
     alejandra
     atop
     bat
+    bibata-cursors
     btop
     bottom
     #cargo
@@ -55,11 +56,10 @@
     hyfetch
     inxi # diagnostic utils
     kitty
-    bibata-cursors
-    #lunarvim # Alternate neovim (lvim)
     luarocks # LUA for nevoim
     mdcat
     mesa-demos # needed for inxi
+    nemo-with-extensions # nemo file mgr
     ncdu # show diskusage
     nh # Nix Helper
     nixd # nix lsp
