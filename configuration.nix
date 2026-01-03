@@ -103,7 +103,7 @@
       enable = false;
       settings = rec {
         initial_session = {
-          command = "${pkgs.tuigreet}/bin/tuigreet --cmd Hyprland --user-menu";
+          command = "${pkgs.tuigreet}/bin/tuigreet --cmd start-hyprland --user-menu";
           user = "greeter";
         };
         default_session = initial_session;

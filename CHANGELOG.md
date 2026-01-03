@@ -6,6 +6,12 @@
 
 ## Inspired by: Tony,btw YouTube Video. (See README.md)
 
+#### Hyprland-btw v0.3.7
+
+- Updated flake, Hyprland v0.53
+  - Updated ly to start hyprland with `start-hyprland`
+  - Hyprland v0.53+ now has safe-mode on crashes
+
 #### Hyprland-btw v0.3.6
 
 - Added `st` terminal from `gh0st` repo

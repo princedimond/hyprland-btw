@@ -74,7 +74,7 @@ in {
           #exec uwsm start -S hyprland-uwsm.desktop
           # export GTK_THEME=Adwaita:dark
           export GTK_THEME=Dracula
-          exec Hyprland
+          exec start-hyprland
         fi
       '';
     };
