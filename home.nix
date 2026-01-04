@@ -15,14 +15,14 @@ in
   imports = [
     #./config/editors/nixvim.nix # Nixvim NeoVIM config
     ./config/cli/git.nix # config git settings AND username/EMail
-    ./config/cli/htop.nix # htop monitor
-    ./config/cli/cava.nix # Audio visualize Dracula theme (others in file)
+    #./config/cli/htop.nix # htop monitor
+    #./config/cli/cava.nix # Audio visualize Dracula theme (others in file)
     #./config/editors/nvf.nix # nvf alternate NVIM config
     ./config/noctalia.nix # Noctalia QuickShell wiring (fronm ddubsos)
-    ./config/overview.nix # Quickshell-overview workspace preview
+    #./config/overview.nix # Quickshell-overview workspace preview
     ./config/editors/vscode.nix # w/plugins and nero hyprland theme
     ./config/editors/evil-helix.nix # w/plugins and catppuccin mocha theme
-    ./config/noctalia.nix # Noctalia QuickShell wiring (fronm ddubsos)
+    #./config/noctalia.nix # Noctalia QuickShell wiring (fronm ddubsos)
     #./config/terminals/kitty.nix #kitty term and kitty-bg (background in kitty)
     ./config/terminals/ghostty.nix
     #./config/terminals/wezterm.nix

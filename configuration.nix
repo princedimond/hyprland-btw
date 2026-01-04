@@ -89,16 +89,6 @@
   console.keyMap = "us";
 
   # Define the primary user account. Don't forget to set a password with ‘passwd’.
-  /*
-    users.users."dwilliams" = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "input" ]; # Enable ‘sudo’ for the user.
-    shell = pkgs.zsh; # default login shell
-    packages = with pkgs; [
-      tree
-    ];
-    };
-  */
   users.users."princedimond" = {
     isNormalUser = true;
     extraGroups = [ "wheel" "input" ];

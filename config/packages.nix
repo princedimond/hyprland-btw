@@ -79,7 +79,7 @@
       rustup
       starship
       tmux # Terminal mux with hybridd ddubs-tonybtw config
-      #ugrep
+      ugrep
       warp-terminal
       wget
       #zig

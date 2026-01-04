@@ -6,8 +6,8 @@
     # Renamed options: userName/userEmail -> settings.user.{name,email}
     settings = {
       user = {
-        name = "Don Williams";
-        email = "don.e.williams@gmail.com";
+        name = "princedimond";
+        email = "princedimond@gmail.com";
       };
 
       # extraConfig -> settings
