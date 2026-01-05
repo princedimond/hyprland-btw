@@ -18,7 +18,8 @@ in {
     ./config/cli/git.nix #config git settings AND username/EMail
     ./config/cli/htop.nix # htop monitor
     ./config/terminals/kitty.nix #kitty term and kitty-bg (background in kitty)
-    ./config/noctalia.nix # Noctalia QuickShell wiring (fronm ddubsos)
+    #  Disablled systemctl b/c it loads older version of noctalia-shell
+    #./config/noctalia.nix # Noctalia QuickShell wiring (fronm ddubsos)
     ./config/overview.nix # Quickshell-overview workspace preview
     ./config/terminals/wezterm.nix # Wezterm terminal
     ./config/editors/vscode.nix # w/plugins and nero hyprland theme

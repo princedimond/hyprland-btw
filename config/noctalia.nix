@@ -39,7 +39,7 @@ in {
 
     Service = {
       # %h is the home directory specifier for systemd
-      ExecStart = "${pkgs.quickshell}/bin/quickshell --path %h/.config/quickshell/noctalia-shell";
+      ExecStart = "noctalia-shell --path %h/.config/quickshell/noctalia-shell";
       Restart = "always";
       RestartSec = 5;
       # Combined QML paths for Qt6
