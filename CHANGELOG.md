@@ -6,6 +6,13 @@
 
 ## Inspired by: Tony,btw YouTube Video. (See README.md)
 
+#### Hyprland-btw v0.3.8
+
+- Disabled `noctalia-shell` systemd service
+- It would load an older version of `noctalia-shell`
+- It's not started from Hyprland `exec-once`
+- As aa result the bindings had to be changed
+
 #### Hyprland-btw v0.3.7
 
 - Updated flake, Hyprland v0.53
