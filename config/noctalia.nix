@@ -12,6 +12,7 @@ in {
   home.packages = [
     noctaliaPkg
     pkgs.quickshell # Ensure quickshell is available for the service
+    pkgs.gpu-screen-recorder
   ];
 
   # Seed the configuration
